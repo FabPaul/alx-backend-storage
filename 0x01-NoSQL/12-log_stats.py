@@ -13,7 +13,7 @@ def get_nginx_logs_stats():
     collection = db.nginx
 
     # get total logs
-    total_logs = collection.count_documents({})
+    total_logs = collection.estimated_document_count({})
     print(f"{total_logs} logs")
 
     # get HTTP methods stats
@@ -28,6 +28,6 @@ def get_nginx_logs_stats():
     print(f"{status_count} status check")
 
 
-    if __name__ == "__main__":
-        get_nginx_logs_stats()
+if __name__ == "__main__":
+    get_nginx_logs_stats()
         
