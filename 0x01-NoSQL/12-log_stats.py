@@ -14,7 +14,7 @@ def get_nginx_logs_stats():
 
     # get total logs
     total_logs = collection.count_documents({})
-    print("f{total_logs} logs")
+    print(f"{total_logs} logs")
 
     # get HTTP methods stats
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
