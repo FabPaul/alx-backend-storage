@@ -25,5 +25,5 @@ def get_nginx_logs_stats():
 
 
 if __name__ == "__main__":
-    collection = MongoClient('mongodb://localhost:27017/').logs.nginx
+    collection = MongoClient('mongodb://127.0.0.1:27017/').logs.nginx
     get_nginx_logs_stats(collection)
