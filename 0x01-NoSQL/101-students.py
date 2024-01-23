@@ -2,25 +2,21 @@
 """ Script that returns all students sorted by average score """
 
 import pymongo
+from operator import itemgetter
 
 
 def top_students(mongo_collection):
     """ returns all students sorted by average """
-    all_students = mongo_collection.aggregate(
-        [
-            {"$match": {}}, {"$unwind": "$topics"},
-            {"$group": {"_id": "$name", "averageScore":
-                        {"$avg": "$topics.score"}}},
-            {"$sort": {"averageScore": -1}},
-        ]
-    )
-
+    all_students = mongo_collection.find()
+    students = []
     for student in all_students:
-        mongo_collection.update_one(
-            {"name": student.get("_id")},
-            {"$set": {"averageScore": student.get("averageScore")}}
-            )
+        scores = []
+        topics = student.get('topics')
+        scores = [topic.get('score')for topic in topics]
+        average_score = float(sum(scores) / len(scores))
+        student['averageScore'] = average_score
+        students.append(student)
 
-        all_students = mongo_collection.find().sort("averageScore", -1)
-
-        return all_students
+    top_students = sorted(students,
+                          key=itemgetter('averageScore'), reverse=True)
+    return top_students
