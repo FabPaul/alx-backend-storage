@@ -7,11 +7,7 @@ import pymongo
 
 def get_nginx_logs_stats():
     """ function that provides nginx logs status """
-    # connect to mongodb
-    client = MongoClient('mongodb://localhost:27017/')
-    db = client.logs
-    collection = db.nginx
-
+ 
     # get total logs
     total_logs = collection.estimated_document_count({})
     print(f"{total_logs} logs")
@@ -29,5 +25,5 @@ def get_nginx_logs_stats():
 
 
 if __name__ == "__main__":
-    get_nginx_logs_stats()
-        
+    collection = MongoClient('mongodb://localhost:27017/').logs.nginx
+    get_nginx_logs_stats(collection)
