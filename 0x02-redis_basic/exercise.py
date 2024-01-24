@@ -22,8 +22,8 @@ class Cache():
 
         return key
 
-    def get(self, key: str, fn: Optional[callable] = None
-            ) -> Union[str, bytes, int, float]:
+    def get(self, key: str,
+            fn: Optional[callable] = None) -> Union[str, bytes, int, float]:
         """
         Method that takes key and fn as callable
         convert the data back to the desired format
@@ -36,12 +36,13 @@ class Cache():
 
     def get_str(self, key: str) -> str:
         """ Method that gets a string format of a value """
-        value = self._redis.get(key, str)
+        value = self._redis.get(key)
         return value.decode("utf-8")
 
     def get_int(self, key: str) -> int:
         """ Method that gets an int format of value """
-        value = self._redis.get(key, int)
+        value = self._redis.get(key)
+
         try:
             value = int(value.decode("utf-8"))
         except Exception:
