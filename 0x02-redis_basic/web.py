@@ -29,3 +29,7 @@ def get_page(url: str) -> str:
     """ Uses requests to obtain the HTML content of a particular url"""
     results = requests.get(url)
     return results
+
+
+if __name__ == "__main__":
+    get_page('http://slowwly.robertomurray.co.uk')
