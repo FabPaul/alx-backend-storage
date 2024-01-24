@@ -62,7 +62,7 @@ def replay(method: Callable):
         except Exception:
             outp = ""
 
-        print(f"{func_name}(*{inp,}) -> {outp}")
+        print(f"{func_name}(*{inp}) -> {outp}")
 
 
 class Cache():
