@@ -30,12 +30,16 @@ class Cache():
             value = fn(value)
             return value
         
-    def get_str(self, key):
+    def get_str(self, key) -> str:
         """ Method that gets a string format of a value """
         string = self.get(key, str)
-        return string
+        return string.decode("utf-8")
     
-    def get_int(self, key):
+    def get_int(self, key) -> int:
         """ Method that gets an int format of value """
         integer = self.get(key, int)
-        return integer
+        try:
+            data = int(integer.decode("utf-8"))
+        except Exception:
+            data = 0
+            return data
