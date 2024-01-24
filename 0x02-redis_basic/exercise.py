@@ -22,7 +22,7 @@ class Cache():
 
         return key
 
-    def get(self, key: str, fn: Optional[Callable] = None
+    def get(self, key: str, fn: Optional[callable] = None
             ) -> Union[str, bytes, int, float]:
         """
         Method that takes key and fn as callable
@@ -34,16 +34,16 @@ class Cache():
             value = fn(value)
             return value
 
-    def get_str(self, key) -> str:
+    def get_str(self, key: str) -> str:
         """ Method that gets a string format of a value """
-        string = self.get(key, str)
-        return string.decode("utf-8")
+        value = self._redis.get(key, str)
+        return value.decode("utf-8")
 
-    def get_int(self, key) -> int:
+    def get_int(self, key: str) -> int:
         """ Method that gets an int format of value """
-        integer = self.get(key, int)
+        value = self._redis.get(key, int)
         try:
-            data = int(integer.decode("utf-8"))
+            value = int(value.decode("utf-8"))
         except Exception:
-            data = 0
-            return data
+            value = 0
+            return value
