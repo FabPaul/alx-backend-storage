@@ -14,13 +14,13 @@ def count_url(method: Callable) -> Callable:
     """ Tracks and counts number of times a URL was accessed in a key"""
 
     @wraps(method)
-    def wrapper(*args):
+    def wrapper(*args, **kwds):
         """ The r=function to be returned"""
         cache = redis.Redis()
-        key = "count:" + args[0]
+        key = f"count:{args[0]}"
         cache.incrby(key, 1)
         cache.expire(key, 10)
-        return method
+        return method(*args, **kwds).text
     return wrapper
 
 
