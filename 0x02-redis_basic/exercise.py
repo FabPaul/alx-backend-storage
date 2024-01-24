@@ -21,3 +21,21 @@ class Cache():
         self._redis.set(key, data)
 
         return key
+    
+    def get(self, key, fn):
+        """ Method that takes key and fn as callable """
+        value = self._redis.get(key)
+
+        if fn:
+            value = fn(value)
+            return value
+        
+    def get_str(self, key):
+        """ Method that gets a string format of a value """
+        string = self.get(key, str)
+        return string
+    
+    def get_int(self, key):
+        """ Method that gets an int format of value """
+        integer = self.get(key, int)
+        return integer
