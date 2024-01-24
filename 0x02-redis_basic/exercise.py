@@ -51,18 +51,18 @@ def replay(method: Callable):
     input = cache.lrange(f"{func_name}:inputs", 0, -1)
     output = cache.lrange(f"{func_name}:outputs", 0, -1)
 
-    for input, output in zip(inputs, outputs):
+    for inp, outp in zip(input, output):
         try:
-            input = input.decode("utf-8")
+            inp = inp.decode("utf-8")
         except Exception:
-            input = ""
+            inp = ""
 
         try:
-            output = output.decode("utf-8")
+            outp = outp.decode("utf-8")
         except Exception:
-            output = ""
+            outp = ""
 
-        print(f"{func_name}(*{input}) -> {output}")
+        print(f"{func_name}(*{inp,}) -> {outp}")
 
 
 class Cache():
