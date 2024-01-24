@@ -32,7 +32,7 @@ class Cache():
 
         if fn:
             value = fn(value)
-            return value
+        return value
 
     def get_str(self, key: str) -> str:
         """ Method that gets a string format of a value """
